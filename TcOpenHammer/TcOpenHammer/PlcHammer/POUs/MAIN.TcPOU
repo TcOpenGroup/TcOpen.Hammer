@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="MAIN" Id="{84d391ff-245d-469c-9f07-0280ac5ddd13}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	horizontalPiston : TcOpen.fbCylinder;
+	verticalPiston : TcOpen.fbCylinder;
+	gripperPiston : TcOpen.fbCylinder;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[horizontalPiston.Manual();
+verticalPiston.Manual();
+gripperPiston.Manual();]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+      <LineId Id="9" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

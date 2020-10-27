@@ -3,19 +3,28 @@
   <POU Name="MAIN" Id="{84d391ff-245d-469c-9f07-0280ac5ddd13}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	{attribute addProperty Name "Manual"}
+	_IsManual : BOOL;
+	{attribute addProperty Name "Horizontal piston"}
 	horizontalPiston : TcOpen.fbCylinder;
+	{attribute addProperty Name "Vertical piston"}
 	verticalPiston : TcOpen.fbCylinder;
+	{attribute addProperty Name "Gripper piston"}
 	gripperPiston : TcOpen.fbCylinder;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[horizontalPiston.Manual();
-verticalPiston.Manual();
-gripperPiston.Manual();]]></ST>
+      <ST><![CDATA[IF(_IsManual) THEN
+	horizontalPiston.Manual();
+	verticalPiston.Manual();
+	gripperPiston.Manual();		
+END_IF;	]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
+      <LineId Id="23" Count="0" />
       <LineId Id="2" Count="0" />
       <LineId Id="9" Count="1" />
+      <LineId Id="24" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

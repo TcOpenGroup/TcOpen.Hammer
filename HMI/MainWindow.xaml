@@ -15,6 +15,6 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     <Grid>
-        <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN}" PresentationType="Base"/>
+        <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN}" PresentationType="Base-Control"/>
     </Grid>
 </Window>

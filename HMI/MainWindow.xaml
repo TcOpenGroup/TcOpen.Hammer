@@ -6,15 +6,84 @@
     xmlns:hammer="clr-namespace:PlcHammer;assembly=PlcHammerConnector"
     xmlns:local="clr-namespace:HMI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vortex="http://vortex.mts/xaml"
-    Title="MainWindow"
+    xmlns:vortex="http://vortex.mts/xaml" 
+    xmlns:inxton="http://inxton.mts/xaml" 
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Width="800"
     Height="450"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Title="MainWindow">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <Grid>
-        <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN}" PresentationType="Base-Control"/>
-    </Grid>
+    <TabControl>
+        <!--<TabItem>
+            <WebBrowser Source="https://docs.tcopengroup.org/articles/TcOpenFramework/application.html"/>
+        </TabItem>-->
+        <TabItem Header="TreeView">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"></RowDefinition>
+                    <RowDefinition Height="30*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <inxton:DynamicTreeView x:Name="dynamicTreeView" DataContext="{Binding PlcHammer.MAIN}"></inxton:DynamicTreeView>
+                <Grid Grid.Column="1" Style="{DynamicResource Card}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="PresentationType">
+                        <GroupBox.Resources>
+                            <x:Array x:Key="PresentationTypes" Type="sys:String">
+                                <sys:String>Base</sys:String>
+                                <sys:String>ControlSlim</sys:String>
+                                <sys:String>DisplaySlim</sys:String>
+                                <sys:String>Diagnostics</sys:String>
+                            </x:Array>
+                        </GroupBox.Resources>
+                        <ComboBox x:Name="comboBox" ItemsSource="{StaticResource PresentationTypes}" SelectedIndex="0"/>
+                    </GroupBox>
+                    <ScrollViewer Grid.Row="1">
+                        <inxton:ObservableContentControl PresentationType="{Binding SelectedItem, ElementName=comboBox}" DataContext="{Binding SelectedItem, ElementName=dynamicTreeView}"></inxton:ObservableContentControl>
+                    </ScrollViewer>
+                </Grid>
+                <Grid Grid.Row="1" Style="{DynamicResource Card}" Grid.ColumnSpan="2" >
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app}" PresentationType="Diagnostics"></vortex:RenderableContentControl>
+                </Grid>
+                
+            </Grid>
+        </TabItem>
+        <TabItem Header="AutoGen" Height="22" Margin="-2.333,-2,-2,0" VerticalAlignment="Top">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <UniformGrid Rows="0" Columns="3">
+                        <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._groundModeTask}"/>
+                        <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._automatModeTask}"/>
+                        <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._serviceModeTask}"/>
+                    </UniformGrid>
+                    <Grid Grid.Row="1">
+                        <ContentControl Visibility="{Binding PlcHammer.MAIN._app._station001._groundModeTask._taskState.Cyclic ,Converter={inxton:TaskStateToVisibilityConverter}}">
+                            <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._groundMode}" PresentationType="Base"/>
+                        </ContentControl>
+                        <ContentControl Visibility="{Binding PlcHammer.MAIN._app._station001._automatModeTask._taskState.Cyclic ,Converter={inxton:TaskStateToVisibilityConverter}}">
+                            <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._automatMode}" PresentationType="Service-Manual" />
+                        </ContentControl>
+                    </Grid>
+                    <vortex:RenderableContentControl Grid.Row="2" DataContext="{Binding PlcHammer.MAIN._app._station001._components}" PresentationType="Service-Manual"></vortex:RenderableContentControl>
+                    <vortex:RenderableContentControl Grid.Row="3" DataContext="{Binding PlcHammer.MAIN._app}" PresentationType="Diagnostics" />
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
 </Window>

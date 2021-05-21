@@ -16,8 +16,8 @@ namespace HMI
     {
         public App()
         {
-            Entry.PlcHammer.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
-                
+            TcoCore.Threading.Dispatcher.SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+            Entry.PlcHammer.Connector.BuildAndStart().ReadWriteCycleDelay = 75;                
         }
     }
 }

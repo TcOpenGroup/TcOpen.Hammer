@@ -1,18 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\_Vortex\out\PlcHammer\src\singles\MAIN.g.cs" Link="_generated\PlcHammer\MAIN.g.cs" />
-    <Compile Include="..\_Vortex\out\PlcHammer\src\singles\PlcHammer.g.cs" Link="_generated\PlcHammer\PlcHammer.g.cs" />
+    <Compile Remove="_generated\PlcHammer\**" />
+    <EmbeddedResource Remove="_generated\PlcHammer\**" />
+    <None Remove="_generated\PlcHammer\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="TcOpen.Connector" Version="0.1.0-alpha.54" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_generated\PlcHammer\" />
+    <PackageReference Include="TcOpen.TcoPneumaticsConnector" Version="0.4.2-alpha.453" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">

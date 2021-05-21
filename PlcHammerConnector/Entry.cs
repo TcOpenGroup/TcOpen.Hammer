@@ -9,6 +9,8 @@ namespace PlcHammerConnector
 {
     public class Entry
     {
-        public static PlcHammer.PlcHammerTwinController PlcHammer { get; } = new PlcHammer.PlcHammerTwinController(Tc3ConnectorAdapter.Create(851));
+        const string AmsId = "172.20.10.2.1.1";
+
+        public static PlcHammer.PlcHammerTwinController PlcHammer { get; } = new PlcHammer.PlcHammerTwinController(Tc3ConnectorAdapter.Create(AmsId, 851, true));
     }
 }

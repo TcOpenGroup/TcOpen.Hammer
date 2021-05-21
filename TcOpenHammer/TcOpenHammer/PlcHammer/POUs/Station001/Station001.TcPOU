@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Station001" Id="{3d3ca50a-cd66-4945-a21d-285298b2ba20}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoObject 
+VAR
+	_components : Station001_Components(THIS^);
+	_groundMode : Station001_GroundMode(THIS^, eRestoreMode.None, _components);
+	_automatMode : Station001_AutomatMode(THIS^, eRestoreMode.None, _components);
+	
+	_groundModeTask : TcoCore.TcoTask(THIS^);
+	_automatModeTask : TcoCore.TcoTask(THIS^);
+	_serviceModeTask : TcoCore.TcoTask(THIS^);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_components();
+
+IF(_serviceModeTask.Execute()) THEN
+	Messenger.Trace('Service mode active');
+	_automatModeTask.Restore();
+	_groundModeTask.Restore();
+	_groundMode.Restore();
+	_automatMode.Restore();
+	_components.Service();
+END_IF
+
+IF(_groundModeTask.Execute()) THEN
+	Messenger.Trace('Ground position mode active');
+	_serviceModeTask.Abort();
+	_automatModeTask.Abort();
+	_groundMode.Run();
+	_groundModeTask.DoneWhen(_groundMode.CurrentStep.ID = 300);
+END_IF
+
+_automatModeTask.Enabled := _groundMode.CurrentStep.ID = 300;
+
+IF(_automatModeTask.Execute()) THEN
+	Messenger.Trace('Automat mode active');
+	_serviceModeTask.Abort();
+	_automatMode.Run();
+END_IF
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

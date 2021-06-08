@@ -18,9 +18,9 @@ namespace PlcHammer
     /// <summary>
     /// Interaction logic for DriveSim.xaml
     /// </summary>
-    public partial class DriveSimView : UserControl
+    public partial class DriveSimServiceView : UserControl
     {
-        public DriveSimView()
+        public DriveSimServiceView()
         {
             InitializeComponent();
         }

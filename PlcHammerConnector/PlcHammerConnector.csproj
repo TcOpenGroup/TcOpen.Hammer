@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,9 +9,12 @@
     <EmbeddedResource Remove="_generated\PlcHammer\**" />
     <None Remove="_generated\PlcHammer\**" />
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="TcOpen.TcoPneumaticsConnector" Version="0.4.2-alpha.453" />
+    <PackageReference Include="TcOpen.Group" Version="0.4.2-alpha.518" />
   </ItemGroup>
+
+
   <ItemGroup>
     <Compile Update="Properties\Localizations.Designer.cs">
       <DesignTime>True</DesignTime>

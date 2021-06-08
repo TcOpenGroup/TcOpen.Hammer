@@ -7,45 +7,49 @@ VAR
 	{attribute addProperty Name "Horizontal axis"}
 	_horizontalAxis : DriveSim(THIS^);
 	{attribute addProperty Name "Vertical piston"}
-	_verticalPiston : TcoPneumatics.Cylinder(THIS^);
+	_verticalPiston : TcoPneumatics.TcoCylinder(THIS^);
 	{attribute addProperty Name "Gripper piston"}
-	_gripperPiston : TcoPneumatics.Cylinder(THIS^);
+	_gripperPiston : TcoPneumatics.TcoCylinder(THIS^);
 END_VAR
 VAR
-	_simulationTimer : Tc2_Standard.TON;
+	_counter : ULINT;
+	_simulationCycle : BOOL;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-_simulationTimer(IN := TRUE, PT := T#5S);
+      <ST><![CDATA[_counter := _counter + 1;
+_simulationCycle := (_counter MOD 500) = 0;
 
-IF(_verticalPiston.outToHomePos AND _simulationTimer.Q) THEN
-	_verticalPiston.inAtHomePos := TRUE;
-	_verticalPiston.inAtWorkPos := FALSE;
+
+IF(IO.qA1[0] AND _simulationCycle) THEN
+	IO.iA1[0] := TRUE;
+	IO.iA1[1] := FALSE;
 END_IF
 
-IF(_verticalPiston.outToWorkPos AND _simulationTimer.Q) THEN
-	_verticalPiston.inAtHomePos := FALSE;
-	_verticalPiston.inAtWorkPos := TRUE;
+IF(IO.qA1[1] AND _simulationCycle) THEN
+	IO.iA1[1] := TRUE;
+	IO.iA1[0] := FALSE;
 END_IF
 
-_verticalPiston();
+_verticalPiston(inoAtHomePos:= IO.iA1[0], inoAtWorkPos:= IO.iA1[1], inoToHomePos:= IO.qA1[0], inoToWorkPos:=IO.qA1[1] );
 
-IF(_gripperPiston.outToHomePos AND _simulationTimer.Q) THEN
-	_gripperPiston.inAtHomePos := TRUE;
-	_gripperPiston.inAtWorkPos := FALSE;
+
+IF(IO.qA1[2] AND _simulationCycle) THEN
+	IO.iA1[2] := TRUE;
+	IO.iA1[3] := FALSE;
 END_IF
 
-IF(_gripperPiston.outToWorkPos AND _simulationTimer.Q) THEN
-	_gripperPiston.inAtHomePos := FALSE;
-	_gripperPiston.inAtWorkPos := TRUE;
+IF(IO.qA1[3] AND _simulationCycle) THEN
+	IO.iA1[3] := TRUE;
+	IO.iA1[2] := FALSE;
 END_IF
 
-_gripperPiston();
+_gripperPiston(inoAtHomePos:= IO.iA1[2], inoAtWorkPos:= IO.iA1[3], inoToHomePos:= IO.qA1[2], inoToWorkPos:=IO.qA1[3]);
+
 
 _horizontalAxis();]]></ST>
     </Implementation>
     <Property Name="Gripper" Id="{45058c8f-3b79-49b6-8729-6389402fa4b0}">
-      <Declaration><![CDATA[PROPERTY Gripper :  REFERENCE TO TcoPneumatics.Cylinder]]></Declaration>
+      <Declaration><![CDATA[PROPERTY Gripper :  REFERENCE TO TcoPneumatics.TcoCylinder]]></Declaration>
       <Get Name="Get" Id="{d387ff5f-f5d6-44a8-b450-cb493513cbfe}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -66,13 +70,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="ResetSimulationTimer" Id="{8f6ad377-9dd3-4d93-838c-ba14cbba1f92}">
-      <Declaration><![CDATA[METHOD PUBLIC ResetSimulationTimer : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_simulationTimer(IN := FALSE, PT := T#1S);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Service" Id="{98457207-8a91-45fe-bd57-5bb0d15033a9}">
       <Declaration><![CDATA[METHOD Service : BOOL
 VAR_INPUT
@@ -85,7 +82,7 @@ _gripperPiston.Service();]]></ST>
       </Implementation>
     </Method>
     <Property Name="VerticalAxis" Id="{95519e2e-c8d9-4542-adf0-78464b1acba5}">
-      <Declaration><![CDATA[PROPERTY VerticalAxis : REFERENCE TO TcoPneumatics.Cylinder]]></Declaration>
+      <Declaration><![CDATA[PROPERTY VerticalAxis : REFERENCE TO TcoPneumatics.TcoCylinder]]></Declaration>
       <Get Name="Get" Id="{2a859788-f8eb-4b2b-8a8a-19eb876b8488}">
         <Declaration><![CDATA[VAR
 END_VAR

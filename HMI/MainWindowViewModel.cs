@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vortex.Presentation;
 
-namespace HMI
+namespace PlcHammer.Hmi
 {
     public class MainWindowViewModel : BindableBase
     {

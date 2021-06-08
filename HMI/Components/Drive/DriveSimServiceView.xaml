@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PlcHammer.DriveSimView"
+﻿<UserControl x:Class="PlcHammer.DriveSimServiceView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,11 +9,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <d:UserControl.DataContext>
-        <local:DriveSimViewModel></local:DriveSimViewModel>
+        <local:DriveSimServiceViewModel></local:DriveSimServiceViewModel>
     </d:UserControl.DataContext>
     <StackPanel DataContext="{Binding Model}">
         <vortex:RenderableContentControl DataContext="{Binding _position}" PresentationType="DisplaySlim"></vortex:RenderableContentControl>
         <vortex:RenderableContentControl DataContext="{Binding _moveAbsoluteTask._targetPosition}" PresentationType="ControlSlim"></vortex:RenderableContentControl>
-        <vortex:RenderableContentControl DataContext="{Binding _moveAbsoluteTask}"></vortex:RenderableContentControl>
+        <vortex:RenderableContentControl DataContext="{Binding _moveAbsoluteTask}" PresentationType="ProgressBar"></vortex:RenderableContentControl>
     </StackPanel>
 </UserControl>

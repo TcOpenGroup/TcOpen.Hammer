@@ -1,27 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Station001_GroundMode" Id="{ddca2260-f9c2-4299-8533-20a2051ac348}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001_GroundMode EXTENDS TcoCore.TcoSequencer
-VAR
-	_components : REFERENCE TO Station001_Components;	
+VAR_IN_OUT		
+	inoComponents : Station001_Components;	
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{d8920fb4-be96-460a-b641-7131ffa71827}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-	AutoRestoreMode : eRestoreMode; 
-	Components : REFERENCE TO Station001_Components; 
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_components REF= Components;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Main" Id="{67136693-3d1b-467a-9ae3-e25b070a14a4}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -40,7 +27,7 @@ END_VAR]]></Declaration>
 		TRUE, 
 		'MOVE VERTICAL AXIS UP')) THEN
 //--------------------------------------------
-	StepCompleteWhen(_components.VerticalAxis.MoveToHome().Done);	
+	StepCompleteWhen(inoComponents.VerticalAxis.MoveToHome().Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -48,8 +35,8 @@ IF(Step(200,
 		TRUE, 
 		'MOVE HORIZONTAL AXIS TO BASE POSITION & OPEN GRIPPER')) THEN
 //--------------------------------------------
-	IF(_components.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done
-	AND _components.Gripper.MoveToHome().Done) THEN
+	IF(inoComponents.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done
+	AND inoComponents.Gripper.MoveToHome().Done) THEN
 	    CompleteStep();
 	END_IF;			
 //--------------------------------------------	
@@ -78,7 +65,7 @@ END_IF;
 METHOD PROTECTED OnStepCompleted
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_components.ResetSimulationTimer();]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
   </POU>

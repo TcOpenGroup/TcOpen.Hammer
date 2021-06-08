@@ -1,27 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Station001_AutomatMode" Id="{edeef130-3aa0-4734-859e-5913facf0752}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001_AutomatMode EXTENDS TcoCore.TcoSequencer
-VAR	
-	_components : REFERENCE TO Station001_Components;	
+VAR_IN_OUT		
+	inoComponents : Station001_Components;	
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{fa1a30f2-9729-459f-a2c5-b5bc9f2c0293}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	Parent : ITcoObject;
-	AutoRestoreMode : eRestoreMode; 
-	Components : REFERENCE TO Station001_Components; 
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[_components REF= Components;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="Main" Id="{23a4d6b9-ff67-49ed-9234-9ae3533ee54f}">
       <Declaration><![CDATA[(*~
 	<docu>
@@ -41,7 +28,7 @@ END_VAR]]></Declaration>
 		TRUE, 
 		'MOVE VERTICAL AXIS DOWN')) THEN
 //--------------------------------------------
-	StepCompleteWhen(_components.VerticalAxis.MoveToWork().Done);	
+	StepCompleteWhen(inoComponents.VerticalAxis.MoveToWork().Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -49,7 +36,7 @@ IF(Step(200,
 		TRUE, 
 		'CLOSE GRIPPER')) THEN
 //--------------------------------------------
-	StepCompleteWhen(_components.Gripper.MoveToWork().Done);	
+	StepCompleteWhen(inoComponents.Gripper.MoveToWork().Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -57,7 +44,7 @@ IF(Step(300,
 		TRUE, 
 		'MOVE VERTICAL AXIS UP')) THEN
 //--------------------------------------------
-	StepCompleteWhen(_components.VerticalAxis.MoveToHome().Done);	
+	StepCompleteWhen(inoComponents.VerticalAxis.MoveToHome().Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -66,7 +53,7 @@ IF(Step(400,
 		TRUE, 
 		'MOVE HORIZONTAL AXIS TO UNLOAD POSITION')) THEN
 //--------------------------------------------
-	StepCompleteWhen(_components.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_WORK_POSITION).Done);	
+	StepCompleteWhen(inoComponents.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_WORK_POSITION).Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -75,7 +62,7 @@ IF(Step(500,
 		TRUE, 
 		'MOVE HORIZONTAL AXIS TO UNLOAD POSITION')) THEN
 //--------------------------------------------
-	StepCompleteWhen(_components.VerticalAxis.MoveToWork().Done);	
+	StepCompleteWhen(inoComponents.VerticalAxis.MoveToWork().Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -83,7 +70,7 @@ IF(Step(600,
 		TRUE, 
 		'OPEN GRIPPER')) THEN
 //--------------------------------------------
-	StepCompleteWhen(_components.Gripper.MoveToHome().Done);	
+	StepCompleteWhen(inoComponents.Gripper.MoveToHome().Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -91,7 +78,7 @@ IF(Step(700,
 		TRUE, 
 		'MOVE VERTICAL UP')) THEN
 //--------------------------------------------
-	StepCompleteWhen(_components.VerticalAxis.MoveToHome().Done);	
+	StepCompleteWhen(inoComponents.VerticalAxis.MoveToHome().Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -99,7 +86,7 @@ IF(Step(800,
 		TRUE, 
 		'MOVE HORIZONTAL TO LOAD')) THEN
 //--------------------------------------------
-	StepCompleteWhen(_components.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done);	
+	StepCompleteWhen(inoComponents.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -125,7 +112,7 @@ END_IF; ]]></ST>
 METHOD PROTECTED OnStepCompleted
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_components.ResetSimulationTimer();]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
   </POU>

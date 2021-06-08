@@ -4,8 +4,8 @@
     <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoObject 
 VAR
 	_components : Station001_Components(THIS^);
-	_groundMode : Station001_GroundMode(THIS^, eRestoreMode.None, _components);
-	_automatMode : Station001_AutomatMode(THIS^, eRestoreMode.None, _components);
+	_groundMode : Station001_GroundMode(THIS^, eRestoreMode.None);
+	_automatMode : Station001_AutomatMode(THIS^, eRestoreMode.None);
 	
 	_groundModeTask : TcoCore.TcoTask(THIS^);
 	_automatModeTask : TcoCore.TcoTask(THIS^);
@@ -13,15 +13,19 @@ VAR
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_components();
+_groundMode(inoComponents := _components);
+_automatMode(inoComponents := _components);
 
 IF(_serviceModeTask.Execute()) THEN
-	Messenger.Trace('Service mode active');
+	Messenger.Trace('Service mode active');	
 	_automatModeTask.Restore();
 	_groundModeTask.Restore();
 	_groundMode.Restore();
 	_automatMode.Restore();
 	_components.Service();
 END_IF
+
+
 
 IF(_groundModeTask.Execute()) THEN
 	Messenger.Trace('Ground position mode active');

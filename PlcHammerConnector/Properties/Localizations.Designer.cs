@@ -59,5 +59,41 @@ namespace PlcHammerConnector.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current position.
+        /// </summary>
+        internal static string ___Current_position__ {
+            get {
+                return ResourceManager.GetString("___Current_position__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move absolute.
+        /// </summary>
+        internal static string ___Move_absolute__ {
+            get {
+                return ResourceManager.GetString("___Move_absolute__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moves the drive to absolute position given by parameter &apos;Target Position&apos;.
+        /// </summary>
+        internal static string ___Moves_the_drive_to_absolute_position_given_by_parameter__Target_Position___ {
+            get {
+                return ResourceManager.GetString("___Moves_the_drive_to_absolute_position_given_by_parameter__Target_Position___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target position.
+        /// </summary>
+        internal static string ___Target_position__ {
+            get {
+                return ResourceManager.GetString("___Target_position__", resourceCulture);
+            }
+        }
     }
 }

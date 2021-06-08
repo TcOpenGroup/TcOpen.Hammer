@@ -211,6 +211,10 @@ _Libraries/
 
 # Inxton.Vortex.Framework 
 _Vortex/
+_generated/
+_meta/
+
+
 
 # Documentation
 

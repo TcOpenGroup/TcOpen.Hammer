@@ -1,30 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
   <POU Name="MAIN" Id="{84d391ff-245d-469c-9f07-0280ac5ddd13}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	{attribute addProperty Name "Manual"}
-	_IsManual : BOOL;
-	{attribute addProperty Name "Horizontal piston"}
-	horizontalPiston : TcOpen.fbCylinder;
-	{attribute addProperty Name "Vertical piston"}
-	verticalPiston : TcOpen.fbCylinder;
-	{attribute addProperty Name "Gripper piston"}
-	gripperPiston : TcOpen.fbCylinder;
+	_app : AppContext;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF(_IsManual) THEN
-	horizontalPiston.Manual();
-	verticalPiston.Manual();
-	gripperPiston.Manual();		
-END_IF;	]]></ST>
+      <ST><![CDATA[_app.Run();
+_app.RtcSynchronize(TRUE, '', 60);]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="23" Count="0" />
-      <LineId Id="2" Count="0" />
-      <LineId Id="9" Count="1" />
-      <LineId Id="24" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

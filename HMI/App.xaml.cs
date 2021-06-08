@@ -16,8 +16,12 @@ namespace HMI
     {
         public App()
         {
-            Entry.PlcHammer.Connector.BuildAndStart().ReadWriteCycleDelay = 75;
-                
+            TcOpen.Inxton.TcoAppDomain.Current.Builder
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
+
+            Entry.PlcHammer.Connector.ReadWriteCycleDelay = 200;
+            Entry.PlcHammer.Connector.BuildAndStart();               
         }
     }
 }

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Station001_AutomatMode" Id="{edeef130-3aa0-4734-859e-5913facf0752}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001_AutomatMode EXTENDS TcoCore.TcoSequencer
+VAR_IN_OUT		
+	inoComponents : Station001_Components;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Main" Id="{23a4d6b9-ff67-49ed-9234-9ae3533ee54f}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			Main method of the sequener. Custom code needs to be placed here. The sequencer is executed by call of InstanceName.Run() method.
+			This method is abstract, and it must be overridden in derived block.
+		</summary>
+	</docu>
+~*)
+METHOD PROTECTED  Main : BOOL
+VAR CONSTANT
+	HORIZONTAL_AXIS_HOME_POSITION : LREAL := 100.0;
+	HORIZONTAL_AXIS_WORK_POSITION : LREAL := 250.0;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF(Step(100, 
+		TRUE, 
+		'MOVE VERTICAL AXIS DOWN')) THEN
+//--------------------------------------------
+	StepCompleteWhen(inoComponents.VerticalAxis.MoveToWork().Done);	
+//--------------------------------------------	
+END_IF; 
+
+IF(Step(200, 
+		TRUE, 
+		'CLOSE GRIPPER')) THEN
+//--------------------------------------------
+	StepCompleteWhen(inoComponents.Gripper.MoveToWork().Done);	
+//--------------------------------------------	
+END_IF; 
+
+IF(Step(300, 
+		TRUE, 
+		'MOVE VERTICAL AXIS UP')) THEN
+//--------------------------------------------
+	StepCompleteWhen(inoComponents.VerticalAxis.MoveToHome().Done);	
+//--------------------------------------------	
+END_IF; 
+
+
+IF(Step(400, 
+		TRUE, 
+		'MOVE HORIZONTAL AXIS TO UNLOAD POSITION')) THEN
+//--------------------------------------------
+	StepCompleteWhen(inoComponents.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_WORK_POSITION).Done);	
+//--------------------------------------------	
+END_IF; 
+
+
+IF(Step(500, 
+		TRUE, 
+		'MOVE HORIZONTAL AXIS TO UNLOAD POSITION')) THEN
+//--------------------------------------------
+	StepCompleteWhen(inoComponents.VerticalAxis.MoveToWork().Done);	
+//--------------------------------------------	
+END_IF; 
+
+IF(Step(600, 
+		TRUE, 
+		'OPEN GRIPPER')) THEN
+//--------------------------------------------
+	StepCompleteWhen(inoComponents.Gripper.MoveToHome().Done);	
+//--------------------------------------------	
+END_IF; 
+
+IF(Step(700, 
+		TRUE, 
+		'MOVE VERTICAL UP')) THEN
+//--------------------------------------------
+	StepCompleteWhen(inoComponents.VerticalAxis.MoveToHome().Done);	
+//--------------------------------------------	
+END_IF; 
+
+IF(Step(800, 
+		TRUE, 
+		'MOVE HORIZONTAL TO LOAD')) THEN
+//--------------------------------------------
+	StepCompleteWhen(inoComponents.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done);	
+//--------------------------------------------	
+END_IF; 
+
+
+IF(Step(900, 
+		TRUE, 
+		'SEUQNCE COMPLETE')) THEN
+//--------------------------------------------
+	CompleteSequence();
+//--------------------------------------------	
+END_IF; ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnStepCompleted" Id="{b6a6d72b-d655-4530-b29e-871f3f3cc5a1}">
+      <Declaration><![CDATA[(*~
+	<docu>
+		<summary>
+			This method is executed upon step completion.
+			This method can be overridden in derived block by custom logic.
+		</summary>			
+	</docu>	
+~*)
+METHOD PROTECTED OnStepCompleted
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

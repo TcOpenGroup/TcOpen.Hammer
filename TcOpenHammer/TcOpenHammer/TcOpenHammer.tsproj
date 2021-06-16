@@ -234,7 +234,7 @@
 			</SubItem>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{109280FE-345A-46E7-B71E-79F11C1FF4CF}" TargetNetId="172.20.10.2.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{109280FE-345A-46E7-B71E-79F11C1FF4CF}" TargetNetId="172.20.10.2.1.1" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
@@ -243,7 +243,7 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{266FDC45-DB60-4534-88C6-BE73DD0A5D11}" Name="PlcHammer" PrjFilePath="PlcHammer\PlcHammer.plcproj" TmcFilePath="PlcHammer\PlcHammer.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project Disabled="true" GUID="{266FDC45-DB60-4534-88C6-BE73DD0A5D11}" Name="PlcHammer" PrjFilePath="PlcHammer\PlcHammer.plcproj" TmcFilePath="PlcHammer\PlcHammer.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PlcHammer\PlcHammer.tmc">
 					<Name>PlcHammer Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>

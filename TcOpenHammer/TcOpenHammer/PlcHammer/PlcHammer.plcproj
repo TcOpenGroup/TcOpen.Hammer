@@ -38,6 +38,9 @@
     <Compile Include="POUs\AppContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Data\DataManager.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -57,12 +60,16 @@
     <Compile Include="POUs\Station001\Station001_AutomatMode.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Station001\Station001_ProductionData.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="Components" />
     <Folder Include="Components\Drive" />
+    <Folder Include="POUs\Data" />
     <Folder Include="POUs\Station001" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />

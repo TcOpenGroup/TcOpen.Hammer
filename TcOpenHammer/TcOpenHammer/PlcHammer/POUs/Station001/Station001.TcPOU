@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Station001" Id="{3d3ca50a-cd66-4945-a21d-285298b2ba20}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoObject 
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001 EXTENDS TcoCore.TcoObject
 VAR
 	_components : Station001_Components(THIS^);
 	_groundMode : Station001_GroundMode(THIS^, eRestoreMode.None);
@@ -10,11 +10,14 @@ VAR
 	_groundModeTask : TcoCore.TcoTask(THIS^);
 	_automatModeTask : TcoCore.TcoTask(THIS^);
 	_serviceModeTask : TcoCore.TcoTask(THIS^);
+	
+	_dataManager : DataManager(THIS^);
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[_components();
 _groundMode(inoComponents := _components);
 _automatMode(inoComponents := _components);
+_dataManager();
 
 IF(_serviceModeTask.Execute()) THEN
 	Messenger.Trace('Service mode active');	
@@ -45,5 +48,27 @@ END_IF
 
 ]]></ST>
     </Implementation>
+    <Property Name="DataManager" Id="{845b8fc3-62e8-4596-8981-e1629c0109be}">
+      <Declaration><![CDATA[PROPERTY DataManager : REFERENCE TO DataManager]]></Declaration>
+      <Get Name="Get" Id="{e98f8a9f-3836-4a9e-ad1f-d27201b66873}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[DataManager REF= _dataManager;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ProductionData" Id="{26a27740-aa81-45cd-b56b-439c3694ffae}">
+      <Declaration><![CDATA[PROPERTY ProductionData : REFERENCE TO Station001_ProductionData]]></Declaration>
+      <Get Name="Get" Id="{b9d8c6af-ccdc-4fa4-b9a5-9998e95d54c8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ProductionData REF= DataManager._data;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

@@ -74,6 +74,10 @@ Do it at the startup of the application, since it's not necessary to do it more 
 	Entry.PlcHammer.MAIN._app._station001._dataManager.InitializeRepository(repository); 
 ```
 
+It's important not to forget the prefix `Plain` ! 
+
+If the type of the structure I'd like to save is called 'Station001_ProductionData' the type that will be in database (so called DTO-data transfer object or POCO - plain old  CLR object) is of type `Plain`+`NameOfMyStructure`.
+
 - Now that repo is connected to repository and PLC, we can use the default dataview. 
 
 In `MainWindow.xaml` I added a new tab with the `DataView` and set the `DataContext` to the data manager instance.

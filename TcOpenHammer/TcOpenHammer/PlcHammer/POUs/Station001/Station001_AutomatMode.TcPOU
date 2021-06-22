@@ -89,6 +89,21 @@ IF(Step(800,
 //--------------------------------------------	
 END_IF; 
 
+IF(Step(850, 
+		TRUE, 
+		'SAVE DATA')) THEN
+//--------------------------------------------
+	Station.ProductionData.Result := THIS^.Context.StartCycleCount MOD 2 = 0;
+	Station.ProductionData.JigId := ULINT_TO_STRING(THIS^.Context.StartCycleCount);
+	IF  Station.ProductionData.Result THEN
+		Station.ProductionData.Errors := '';
+	ELSE
+		Station.ProductionData.Errors := 'something went wrong';
+	END_IF
+	StepCompleteWhen(Station.DataManager.Create(Identifier := Station.ProductionData.JigId).Done);
+//--------------------------------------------	
+END_IF; 
+
 
 IF(Step(900, 
 		TRUE, 
@@ -114,5 +129,19 @@ METHOD PROTECTED OnStepCompleted
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Station" Id="{7b3a984e-0e07-424a-8212-ddec4bd000f6}">
+      <Declaration><![CDATA[PROPERTY Station : REFERENCE TO Station001]]></Declaration>
+      <Get Name="Get" Id="{7cd5bca0-b7ed-4ffe-b2ac-032230b5f82a}">
+        <Declaration><![CDATA[VAR
+    _station : POINTER TO Station001;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(_Parent,_station) THEN // Check if _Parent is Station001
+	Station REF= _station^;                // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

@@ -6,6 +6,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Serilog.Events;
+using Serilog;
+using Raven.Client.Documents;
 
 namespace HMI
 {
@@ -20,8 +23,9 @@ namespace HMI
                 .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter())
                 .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);
 
-            Entry.PlcHammer.Connector.ReadWriteCycleDelay = 200;
-            Entry.PlcHammer.Connector.BuildAndStart();               
+            Entry.PlcHammer.Connector.ReadWriteCycleDelay = 2000;
+            Entry.PlcHammer.Connector.BuildAndStart();
+            Entry.PlcHammer.Connector.ReadWriteCycleDelay = 150;
         }
     }
 }

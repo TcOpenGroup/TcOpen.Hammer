@@ -2,10 +2,9 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Station001_AutomatMode" Id="{edeef130-3aa0-4734-859e-5913facf0752}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK Station001_AutomatMode EXTENDS TcoCore.TcoSequencer
-VAR_IN_OUT		
-	inoComponents : Station001_Components;	
-END_VAR
-]]></Declaration>
+VAR_IN_OUT
+    inoComponents : Station001_Components;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>

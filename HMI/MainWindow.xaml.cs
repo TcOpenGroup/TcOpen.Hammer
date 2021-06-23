@@ -34,8 +34,7 @@ namespace PlcHammer.Hmi
         {
             var verticalPosition = (short)value;
 
-            return verticalPosition - 90;
-            TcoDrivesBeckhoff.TcoDriveSimpleServiceView.
+            return verticalPosition - 90;          
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

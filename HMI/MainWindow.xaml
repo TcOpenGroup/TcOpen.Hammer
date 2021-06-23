@@ -67,7 +67,7 @@
                                 BorderThickness="2"
                                 CornerRadius="2.5" />
                             <Border
-                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalNcAxis._position.Cyclic}"
+                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalNcAxis._axisStatus.ActPos.Cyclic}"
                                 Canvas.Top="{Binding PlcHammer.MAIN._app._station001._components._verticalPosition.Cyclic}"
                                 Width="50"
                                 Height="{Binding PlcHammer.MAIN._app._station001._components._verticalPistonStroke.Cyclic}"

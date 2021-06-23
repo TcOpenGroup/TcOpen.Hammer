@@ -1,11 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Station001_GroundMode" Id="{ddca2260-f9c2-4299-8533-20a2051ac348}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK Station001_GroundMode EXTENDS TcoCore.TcoSequencer
-VAR_IN_OUT		
-	inoComponents : Station001_Components;	
-END_VAR
-]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK Station001_GroundMode EXTENDS TcoCore.TcoSequencer]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
@@ -27,7 +23,7 @@ END_VAR]]></Declaration>
 		TRUE, 
 		'MOVE VERTICAL AXIS UP')) THEN
 //--------------------------------------------
-	StepCompleteWhen(inoComponents.VerticalAxis.MoveToHome().Done);	
+	StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);	
 //--------------------------------------------	
 END_IF; 
 
@@ -35,8 +31,8 @@ IF(Step(200,
 		TRUE, 
 		'MOVE HORIZONTAL AXIS TO BASE POSITION & OPEN GRIPPER')) THEN
 //--------------------------------------------
-	IF(inoComponents.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done
-	AND inoComponents.Gripper.MoveToHome().Done) THEN
+	IF(Station.Components.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done
+	AND Station.Components.Gripper.MoveToHome().Done) THEN
 	    CompleteStep();
 	END_IF;			
 //--------------------------------------------	
@@ -68,5 +64,19 @@ METHOD PROTECTED OnStepCompleted
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Station" Id="{89eeafda-6cbb-488f-8576-1ca184a3ae1c}">
+      <Declaration><![CDATA[PROPERTY Station : REFERENCE TO Station001]]></Declaration>
+      <Get Name="Get" Id="{258f5e6e-3314-4c09-bae5-59b971cf8630}">
+        <Declaration><![CDATA[VAR
+    _station : POINTER TO Station001;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF __QUERYPOINTER(_Parent,_station) THEN // Check if _Parent is Station001
+	Station REF= _station^;              // If the check is successful dereference a pointer. simlar to THIS^ or SUPER^
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

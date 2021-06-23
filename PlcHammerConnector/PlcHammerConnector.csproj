@@ -27,4 +27,7 @@
 			<LastGenOutput>Localizations.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="_meta\echac\" />
+	</ItemGroup>
 </Project>

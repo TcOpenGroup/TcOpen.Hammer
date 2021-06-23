@@ -32,13 +32,25 @@
     <Compile Include="Components\Drive\IDrive.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Misc\Checkers\AnalogueValueCheck.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Misc\Checkers\Checkers.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Misc\Checkers\eCheckResult.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\AppContext.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Data\DataManager.TcPOU">
+    <Compile Include="POUs\Data\ProcessDataManager.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Data\TechnologicalDataManager.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
@@ -63,12 +75,17 @@
     <Compile Include="POUs\Station001\Station001_ProductionData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Station001\Station001_TechnologicalSettings.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="Components" />
     <Folder Include="Components\Drive" />
+    <Folder Include="Misc" />
+    <Folder Include="Misc\Checkers" />
     <Folder Include="POUs\Data" />
     <Folder Include="POUs\Station001" />
     <Folder Include="VISUs" />

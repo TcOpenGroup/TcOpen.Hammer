@@ -5,6 +5,11 @@
 STRUCT	
 	PassedPartsHorizontalPosition : LREAL;
 	FailedPartsHorizontalPosition : LREAL;
+	AxisSpeed : LREAL;
+	AxisAcc : LREAL;
+	AxisDcc : LREAL;
+	AxisJerk : LREAL;
+
 END_STRUCT
 END_TYPE
 ]]></Declaration>

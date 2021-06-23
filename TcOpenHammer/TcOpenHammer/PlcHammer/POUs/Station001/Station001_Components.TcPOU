@@ -4,8 +4,9 @@
     <Declaration><![CDATA[{attribute wpf [Container(Layout.Stack)]}
 FUNCTION_BLOCK Station001_Components EXTENDS TcoCore.TcoObject
 VAR	
+//	_horizontalAxis : DriveSim(THIS^);
 	{attribute addProperty Name "Horizontal axis"}
-	_horizontalAxis : DriveSim(THIS^);
+	_horizontalNcAxis : TcoDrivesBeckhoff.TcoDriveSimple(THIS^); 
 	{attribute addProperty Name "Vertical piston"}
 	_verticalPiston : TcoPneumatics.TcoCylinder(THIS^);
 	{attribute addProperty Name "Gripper piston"}
@@ -27,9 +28,22 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[Simulation();
 
-_verticalPiston(inoAtHomePos:= IO.iA1[0], inoAtWorkPos:= IO.iA1[1], inoToHomePos:= IO.qA1[0], inoToWorkPos:=IO.qA1[1] );
-_gripperPiston(inoAtHomePos:= IO.iA1[2], inoAtWorkPos:= IO.iA1[3], inoToHomePos:= IO.qA1[2], inoToWorkPos:=IO.qA1[3]);
-_horizontalAxis();]]></ST>
+_verticalPiston(inoAtHomePos := IO.iA1[0],
+    inoAtWorkPos := IO.iA1[1],
+    inoToHomePos := IO.qA1[0],
+    inoToWorkPos := IO.qA1[1]);
+
+_gripperPiston(inoAtHomePos := IO.iA1[2],
+    inoAtWorkPos := IO.iA1[3],
+    inoToHomePos := IO.qA1[2],
+    inoToWorkPos := IO.qA1[3]);
+
+//_horizontalAxis();
+_horizontalNcAxis(inEnable := TRUE,
+    inEnablePositive := TRUE,
+    inEnableNegative := TRUE,
+    inCalibrationCam := FALSE,
+    inoAxisRef := IO.Axis1);]]></ST>
     </Implementation>
     <Property Name="Gripper" Id="{45058c8f-3b79-49b6-8729-6389402fa4b0}">
       <Declaration><![CDATA[PROPERTY Gripper :  REFERENCE TO TcoPneumatics.TcoCylinder]]></Declaration>
@@ -53,13 +67,25 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="HorizontalNcAxis" Id="{50ed9664-d5a7-4e96-a637-5203276f92d3}">
+      <Declaration><![CDATA[PROPERTY HorizontalNcAxis : TcoDrivesBeckhoff.ITcoDriveSimple]]></Declaration>
+      <Get Name="Get" Id="{a7390b8e-0434-4b57-9dfc-bdeb3f9087e0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[HorizontalNcAxis := _horizontalNcAxis;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Service" Id="{98457207-8a91-45fe-bd57-5bb0d15033a9}">
       <Declaration><![CDATA[METHOD Service : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_horizontalAxis.Service();
+        <ST><![CDATA[//_horizontalAxis.Service();
+_horizontalNcAxis.Service();
 _verticalPiston.Service();
 _gripperPiston.Service();]]></ST>
       </Implementation>

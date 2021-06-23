@@ -42,7 +42,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <ScrollViewer Grid.Row="0">
-                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._components}" PresentationType="Service" />
+                                <vortex:RenderableContentControl DataContext="{Binding PlcHammer.MAIN._app._station001._components}" PresentationType="Service-Manual" />
                             </ScrollViewer>
                             <Expander Grid.Row="1">
                             <vortex:RenderableContentControl                                
@@ -67,7 +67,7 @@
                                 BorderThickness="2"
                                 CornerRadius="2.5" />
                             <Border
-                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalAxis._position.Cyclic}"
+                                Canvas.Left="{Binding PlcHammer.MAIN._app._station001._components._horizontalNcAxis._position.Cyclic}"
                                 Canvas.Top="{Binding PlcHammer.MAIN._app._station001._components._verticalPosition.Cyclic}"
                                 Width="50"
                                 Height="{Binding PlcHammer.MAIN._app._station001._components._verticalPistonStroke.Cyclic}"

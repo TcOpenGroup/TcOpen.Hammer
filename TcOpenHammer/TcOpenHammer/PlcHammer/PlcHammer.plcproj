@@ -112,6 +112,10 @@
       <DefaultResolution>TcoData, 0.4.2.525 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoData</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcoDrivesBeckhoff">
+      <DefaultResolution>TcoDrivesBeckhoff, * (Vortex.Library)</DefaultResolution>
+      <Namespace>TcoDrivesBeckhoff</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="TcoElements">
       <DefaultResolution>TcoElements, 0.4.2.525 (Vortex.Library)</DefaultResolution>
       <Namespace>TcoElements</Namespace>
@@ -146,6 +150,11 @@
     <PlaceholderResolution Include="TcoPneumatics">
       <Resolution>TcoPneumatics, 0.4.2.525 (Vortex.Library)</Resolution>
     </PlaceholderResolution>
+  </ItemGroup>
+  <ItemGroup>
+    <SubObject Include="Station001_Components.HorizontalAxis">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

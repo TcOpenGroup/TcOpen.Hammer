@@ -19,34 +19,32 @@ VAR CONSTANT
 	HORIZONTAL_AXIS_HOME_POSITION : LREAL := 0.0;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF(Step(100, 
-		TRUE, 
-		'MOVE VERTICAL AXIS UP')) THEN
-//--------------------------------------------
-	StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);	
-//--------------------------------------------	
-END_IF; 
-
-IF(Step(200, 
-		TRUE, 
-		'MOVE HORIZONTAL AXIS TO BASE POSITION & OPEN GRIPPER')) THEN
-//--------------------------------------------
-	IF(Station.Components.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done
-	AND Station.Components.Gripper.MoveToHome().Done) THEN
-	    CompleteStep();
-	END_IF;			
-//--------------------------------------------	
-END_IF; 
-
-IF(Step(300, 
-		TRUE, 
-		'GROUND POSITION DONE')) THEN
-//--------------------------------------------
-;			
-//--------------------------------------------	
+        <ST><![CDATA[IF (Step(100, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
+    //--------------------------------------------	
 END_IF;
 
-]]></ST>
+IF (Step(200, TRUE, 'MOVE HORIZONTAL AXIS TO BASE POSITION & OPEN GRIPPER')) THEN
+    //--------------------------------------------
+    //	IF(Station.Components.HorizontalAxis.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION).Done
+    //	AND Station.Components.Gripper.MoveToHome().Done) THEN
+    IF (Station.Components.HorizontalNcAxis.DriveRef.MoveAbsolute(HORIZONTAL_AXIS_HOME_POSITION,
+        THIS^.Station.TechnologicalDataManager._data.AxisSpeed,
+        THIS^.Station.TechnologicalDataManager._data.AxisAcc,
+        THIS^.Station.TechnologicalDataManager._data.AxisDcc,
+        THIS^.Station.TechnologicalDataManager._data.AxisJerk).Done AND
+        Station.Components.Gripper.MoveToHome().Done) THEN
+        CompleteStep();
+    END_IF;
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(300, TRUE, 'GROUND POSITION DONE')) THEN
+    //--------------------------------------------
+    ;
+    //--------------------------------------------	
+END_IF;]]></ST>
       </Implementation>
     </Method>
     <Method Name="OnStepCompleted" Id="{d16ba766-6001-41f1-bdf6-d326104c66f1}">

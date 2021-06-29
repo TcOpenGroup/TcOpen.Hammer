@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="DriveSim" Id="{268333eb-fb89-4342-a1df-991907c3378e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DriveSim EXTENDS TcoCore.TcoComponent IMPLEMENTS IDrive
 VAR
@@ -26,6 +26,17 @@ END_VAR
 MoveAbsolute := _moveAbsoluteTask.Invoke();]]></ST>
       </Implementation>
     </Method>
+    <Property Name="MoveAbsoluteTask" Id="{523daa0d-a2eb-4f3e-95b5-945fa86dbbad}">
+      <Declaration><![CDATA[PROPERTY MoveAbsoluteTask : REFERENCE TO DriveSimMoveAbsoluteTask]]></Declaration>
+      <Get Name="Get" Id="{4ae57316-fc76-4112-ad1f-822c3c895b6c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MoveAbsoluteTask REF= _moveAbsoluteTask;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Position" Id="{21e50bee-72b1-4176-b263-6166c4cf89fd}">
       <Declaration><![CDATA[PROPERTY Position : LREAL]]></Declaration>
       <Get Name="Get" Id="{6fe391a0-8205-4811-9253-7d81a1d28378}">

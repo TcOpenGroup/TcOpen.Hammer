@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net48;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+  
   <ItemGroup>
-    <PackageReference Include="TcOpen.Group.Wpf" Version="0.4.2-alpha.528" />
+    <PackageReference Include="TcOpen.Group.Wpf" Version="0.4.2-alpha.530" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\PlcHammerConnector\PlcHammerConnector.csproj" />
   </ItemGroup>

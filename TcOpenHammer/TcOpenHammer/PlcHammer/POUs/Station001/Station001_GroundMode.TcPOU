@@ -20,13 +20,28 @@ VAR CONSTANT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (Step(100, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
+        <ST><![CDATA[IF (Step(10, TRUE, 'RESTORE ALL COMPONENTS')) THEN
+    //--------------------------------------------
+	Station.Components._horizontalNcAxis.Restore();
+	Station.Components._verticalPiston.Restore();
+	Station.Components._gripperPiston.Restore();
+    StepCompleteWhen(TRUE);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(100, TRUE, 'MOVE VERTICAL AXIS UP')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.VerticalAxis.MoveToHome().Done);
     //--------------------------------------------	
 END_IF;
 
-IF (Step(101, NOT Station.Components.HorizontalNcAxis.DriveRef._axisStatus.Homed, 'HORIZONTAL AXIS HOMING')) THEN
+IF (Step(125, TRUE, 'LOAD TECHNOLOGICAL SETTINGS')) THEN
+    //--------------------------------------------
+    StepCompleteWhen(Station.TechnologicalDataManager.Read('default').Done);
+    //--------------------------------------------	
+END_IF;
+
+IF (Step(150, NOT Station.Components.HorizontalNcAxis.DriveRef._axisStatus.Homed, 'HORIZONTAL AXIS HOMING')) THEN
     //--------------------------------------------
     StepCompleteWhen(Station.Components.HorizontalNcAxis.DriveRef.Home(inPosition := 0,
             inHomingMode := TcoDrivesBeckhoff.eHomingMode.MC_Direct,

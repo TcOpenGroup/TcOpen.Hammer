@@ -132,17 +132,18 @@
                 </Grid>
                 <UniformGrid
                     Grid.Row="2"
-                    Columns="3"
+                    Columns="4"
                     Rows="0">
                     <UniformGrid.Resources>
                         <Style TargetType="vortex:RenderableContentControl">
                             <Setter Property="Margin" Value="25" />
-                            <Setter Property="Width" Value="300" />
+                            <Setter Property="Width" Value="250" />
                         </Style>
                     </UniformGrid.Resources>
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._groundModeTask}" />
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._automatModeTask}" />
                     <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._serviceModeTask}" />
+                    <vortex:RenderableContentControl DataContext="{Binding PlcHammer.TECH_MAIN._app._station001._swiftModeTask}" />
                 </UniformGrid>
             </Grid>
         </TabItem>

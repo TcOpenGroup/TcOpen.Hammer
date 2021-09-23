@@ -16,4 +16,4 @@ Check prerequisites [here](https://github.com/TcOpenGroup/TcOpen/blob/dev/README
 - Login and Run your local PLC or Machine 
 - Run Project PlcHammer.Hmi 
 
-Enjoy 
+Enjoy!

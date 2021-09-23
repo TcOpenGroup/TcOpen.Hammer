@@ -35,5 +35,9 @@ END_VAR
 //        0.05 * MAIN._app._station001._components._dimZsim.inMinValue + 0.95 * MAIN._app._station001._components._dimZsim.inMaxValue;
 //END_IF]]></ST>
     </Implementation>
+    <LineIds Name="ProcessDataManager">
+      <LineId Id="3" Count="24" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

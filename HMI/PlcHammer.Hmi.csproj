@@ -6,7 +6,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="TcOpen.Group.Wpf" Version="0.4.2-alpha.530" />
+    <PackageReference Include="TcOpen.Group.Wpf" Version="0.4.2-alpha.557" />
   </ItemGroup>
   
   <ItemGroup>

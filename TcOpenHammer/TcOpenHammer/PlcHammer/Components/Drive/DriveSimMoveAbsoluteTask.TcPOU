@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="DriveSimMoveAbsoluteTask" Id="{a97e39ea-4b3e-4e18-adf0-49b05c468ef4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK DriveSimMoveAbsoluteTask EXTENDS TcoCore.TcoTask
 VAR_IN_OUT
@@ -40,5 +40,15 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
+    <LineIds Name="DriveSimMoveAbsoluteTask">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DriveSimMoveAbsoluteTask.TargetPosition.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DriveSimMoveAbsoluteTask.TargetPosition.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

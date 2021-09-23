@@ -87,5 +87,27 @@ METHOD PROTECTED  ServiceMode
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="DriveSim">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DriveSim.MoveAbsolute">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DriveSim.MoveAbsoluteTask.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DriveSim.Position.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DriveSim.Position.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DriveSim.Restore">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="DriveSim.ServiceMode">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

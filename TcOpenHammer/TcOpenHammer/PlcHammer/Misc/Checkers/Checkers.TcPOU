@@ -52,5 +52,20 @@ END_VAR
 StartChecks REF= THIS^;]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="Checkers">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Checkers.CheckAnalogue">
+      <LineId Id="3" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Checkers.HasPassed">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Checkers.StartChecks">
+      <LineId Id="3" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

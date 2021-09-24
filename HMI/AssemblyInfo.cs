@@ -10,4 +10,4 @@ using Vortex.Presentation.Wpf;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly:RenderableAssembly()]
+[assembly: RenderableAssembly()]

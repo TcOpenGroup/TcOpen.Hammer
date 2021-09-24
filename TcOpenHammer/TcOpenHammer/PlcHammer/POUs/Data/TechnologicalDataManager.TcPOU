@@ -33,5 +33,9 @@ END_VAR
 //    _data.AxisJerk := 50000.0;
 //END_IF]]></ST>
     </Implementation>
+    <LineIds Name="TechnologicalDataManager">
+      <LineId Id="3" Count="22" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

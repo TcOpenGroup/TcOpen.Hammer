@@ -142,7 +142,7 @@ END_IF;
 
 IF (Step(850, TRUE, 'SAVE DATA')) THEN
     //--------------------------------------------	
-    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := ULINT_TO_STRING(THIS^.Context.Rtc.TickClock())).Done);
+    StepCompleteWhen(Station.ProcessTraceabilty.Create(Identifier := ULINT_TO_STRING(THIS^.Context.RealTimeClock.TickClock())).Done);
     //--------------------------------------------	
 END_IF;
 
@@ -188,5 +188,19 @@ END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <LineIds Name="Station001_AutomatMode">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001_AutomatMode.Main">
+      <LineId Id="3" Count="131" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001_AutomatMode.OnStepCompleted">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001_AutomatMode.Station.Get">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

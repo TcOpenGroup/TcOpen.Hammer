@@ -11,5 +11,9 @@ END_VAR
 _app.RtcSynchronize(TRUE, '', 60);
 ]]></ST>
     </Implementation>
+    <LineIds Name="TECH_MAIN">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

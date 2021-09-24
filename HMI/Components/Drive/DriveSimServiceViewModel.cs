@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vortex.Presentation.Wpf;
+﻿using Vortex.Presentation.Wpf;
 
 namespace PlcHammer
 {
@@ -11,7 +6,7 @@ namespace PlcHammer
     {
         public DriveSimServiceViewModel()
         {
-           
+
         }
 
 

@@ -177,5 +177,19 @@ END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <LineIds Name="Station001_Swift">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001_Swift.Main">
+      <LineId Id="3" Count="120" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001_Swift.OnStepCompleted">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="Station001_Swift.Station.Get">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

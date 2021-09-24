@@ -10,5 +10,9 @@ END_VAR
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
     </Implementation>
+    <LineIds Name="ProcessDataManager">
+      <LineId Id="3" Count="24" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

@@ -1,13 +1,33 @@
 ﻿using PlcHammer;
 using PlcHammerConnector;
-using System;
-using System.Linq;
-using System.Windows;
-using TcOpen.Inxton.Data.MongoDb;
-using TcOpen.Inxton.Data.Json;
-using System.Reflection;
 using System.IO;
+
+/* Unmerged change from project 'PlcHammer.Hmi (net5.0-windows)'
+Before:
+using System.Linq;
+After:
+using System.IO;
+using System.Linq;
+*/
+using System.Reflection;
+using System.Windows;
+
+/* Unmerged change from project 'PlcHammer.Hmi (net5.0-windows)'
+Before:
+using TcOpen.Inxton.Data.MongoDb;
+After:
 using TcOpen.Inxton.Abstractions.Data;
+*/
+using TcOpen.Inxton.Data;
+using TcOpen.Inxton.Data.Json;
+using
+/* Unmerged change from project 'PlcHammer.Hmi (net5.0-windows)'
+Before:
+using TcOpen.Inxton.Abstractions.Data;
+After:
+using TcOpen.Inxton.Data.MongoDb;
+*/
+TcOpen.Inxton.Data.MongoDb;
 
 namespace HMI
 {
@@ -28,7 +48,7 @@ namespace HMI
 
             // Execute PLC connector operations.
             Entry.PlcHammer.Connector.ReadWriteCycleDelay = 50; // Cyclical access period.
-            
+
             Entry.PlcHammer.Connector.BuildAndStart(); // Create connection, loads symbols, and fires cyclic operations.
 
             // SetUpMongoDatabase();
@@ -54,12 +74,23 @@ namespace HMI
             var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
             var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
 
-            if(!Directory.Exists(repositoryDirectory))
+            if (!Directory.Exists(repositoryDirectory))
             {
                 Directory.CreateDirectory(repositoryDirectory);
+
+                /* Unmerged change from project 'PlcHammer.Hmi (net5.0-windows)'
+                Before:
+                            }
+
+                            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));                        
+                After:
+                            }
+
+                            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));                        
+                */
             }
-            
-            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));                        
+
+            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));
             var processTraceabiltyRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "Traceability")));
             var technologyDataRepository = new JsonRepository<PlainStation001_TechnologicalSettings>(new JsonRepositorySettings<PlainStation001_TechnologicalSettings>(Path.Combine(repositoryDirectory, "TechnologicalSettings")));
 
@@ -71,12 +102,12 @@ namespace HMI
         {
             var mongoUri = "mongodb://localhost:27017";
             var databaseName = "Hammer";
-          
+
             var processRecipiesRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "ProcessSettings"));
             var processTraceabiltyRepository = new MongoDbRepository<PlainStation001_ProductionData>(new MongoDbRepositorySettings<PlainStation001_ProductionData>(mongoUri, databaseName, "Traceability"));
             var technologyDataRepository = new MongoDbRepository<PlainStation001_TechnologicalSettings>(new MongoDbRepositorySettings<PlainStation001_TechnologicalSettings>(mongoUri, databaseName, "TechnologicalSettings"));
 
             SetUpRepositories(processRecipiesRepository, processTraceabiltyRepository, technologyDataRepository);
-        }   
+        }
     }
 }

@@ -7,6 +7,8 @@ VAR_GLOBAL
 	iA2 AT %I* : ARRAY[0..7] OF BOOL;
 	qA1 AT %Q* : ARRAY[0..7] OF BOOL;
 	qA2 AT %Q* : ARRAY[0..7] OF BOOL;
+	Axis1	:	TcoDrivesBeckhoff.TcoAxisRef;
+	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

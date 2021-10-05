@@ -10,9 +10,9 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="TcOpen.Group" Version="0.4.2-alpha.557" />
+    <PackageReference Include="TcOpen.Group" Version="0.4.2-alpha.560" />
     <PackageReference Include="Inxton.vortex.compiler.console" Version="1.15.1-nightly.608" />
-    <PackageReference Include="TcOpen.Group.Wpf" Version="0.4.2-alpha.557" />  
+    <PackageReference Include="TcOpen.Group.Wpf" Version="0.4.2-alpha.560" />  
   </ItemGroup>
   
 	<ItemGroup>

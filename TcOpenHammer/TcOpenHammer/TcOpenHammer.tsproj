@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.20">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.17">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-000000000035}" TcBaseType="true" HideType="true">UINTARR2</Name>
@@ -1522,6 +1522,9 @@ External Setpoint Generation:
 					<Value>FunctionBlock</Value>
 				</Property>
 			</Properties>
+			<Hides>
+				<Hide GUID="{6F825C70-D825-9186-4909-9111ED8B4F0A}"/>
+			</Hides>
 		</DataType>
 		<DataType>
 			<Name GUID="{DC2DBAE4-A342-28C3-91A7-BA8E13B004E9}" Namespace="TcoIoBeckhoff" AutoDeleteType="true">StatusStructBasic</Name>

@@ -12,7 +12,7 @@ namespace PlcHammer.Hmi
     /// </summary>
     public partial class MainWindow : Window
     {
-
+ 
         public MainWindow()
         {
             DataContext = this;
@@ -60,7 +60,7 @@ namespace PlcHammer.Hmi
         }
     }
 
-
+ 
 
     public class AxisPositionConverter : MarkupExtension, IValueConverter
     {
@@ -110,5 +110,5 @@ namespace PlcHammer.Hmi
             return this;
         }
 
-    }
+     }
 }

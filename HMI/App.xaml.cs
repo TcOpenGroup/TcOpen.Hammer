@@ -1,33 +1,16 @@
 ﻿using PlcHammer;
 using PlcHammerConnector;
-using System.IO;
-
-/* Unmerged change from project 'PlcHammer.Hmi (net5.0-windows)'
-Before:
-using System.Linq;
-After:
+using Serilog;
 using System.IO;
 using System.Linq;
-*/
 using System.Reflection;
 using System.Windows;
-
-/* Unmerged change from project 'PlcHammer.Hmi (net5.0-windows)'
-Before:
-using TcOpen.Inxton.Data.MongoDb;
-After:
-using TcOpen.Inxton.Abstractions.Data;
-*/
 using TcOpen.Inxton.Data;
 using TcOpen.Inxton.Data.Json;
-using
-/* Unmerged change from project 'PlcHammer.Hmi (net5.0-windows)'
-Before:
-using TcOpen.Inxton.Abstractions.Data;
-After:
 using TcOpen.Inxton.Data.MongoDb;
-*/
-TcOpen.Inxton.Data.MongoDb;
+using TcOpen.Inxton.Local.Security;
+using TcOpen.Inxton.Security;
+using Serilog;
 
 namespace HMI
 {
@@ -41,23 +24,68 @@ namespace HMI
         /// </summary>
         public App()
         {
-            // App setup
-            TcOpen.Inxton.TcoAppDomain.Current.Builder
-                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter()) // Sets the logger configuration (default reports only to console).
-                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get);    // This is necessary for UI operation.
-
             // Execute PLC connector operations.
             Entry.PlcHammer.Connector.ReadWriteCycleDelay = 50; // Cyclical access period.
+            Entry.PlcHammer.Connector.BuildAndStart();          // Create connection, loads symbols, and fires cyclic operations.
 
-            Entry.PlcHammer.Connector.BuildAndStart(); // Create connection, loads symbols, and fires cyclic operations.
+            // Ask about data repository type
+            System.Console.Write("What data repository shall we use? ([M]ongoDB, [J]son). Press enter for Json [J]: ");
+            var answer = System.Console.ReadLine().FirstOrDefault();
+            System.Console.WriteLine("Starting application with selected repository type.");
 
-            // SetUpMongoDatabase();
-            SetUpJsonRepositories();
+
+            // Set-up users
+            IAuthenticationService authenticationService;
+            switch (answer)
+            {
+                case 'M':
+                    authenticationService = SecurityManager.Create(new MongoDbRepository<UserData>(new MongoDbRepositorySettings<UserData>("mongodb://localhost:27017", "Hammer", "Users")));
+                    break;
+                case 'J':
+                    authenticationService = SecurityManager.Create(SetUpJsonRepository());
+                    break;
+                default:
+                    authenticationService = SecurityManager.Create(SetUpJsonRepository());
+                    break;
+            }
+                        
+            ISecurityManager securityManager = SecurityManager.Manager;
+            securityManager.GetOrCreateRole(new Role("Service", "Maintenance"));
+
+            // App setup
+            TcOpen.Inxton.TcoAppDomain.Current.Builder
+                .SetUpLogger(new TcOpen.Inxton.Logging.SerilogAdapter(new LoggerConfiguration()
+                                        .WriteTo.Console()        // This will write log into application console.  
+                                        .WriteTo.Notepad()        // This will write logs to first instance of notepad program.
+                                        .MinimumLevel.Verbose())) // Sets the logger configuration (default reports only to console).
+                .SetDispatcher(TcoCore.Wpf.Threading.Dispatcher.Get) // This is necessary for UI operation.  
+                .SetSecurity(authenticationService)
+                .SetEditValueChangeLogging(Entry.PlcHammer.Connector);              
+         
+            // Initialize logger
+            Entry.PlcHammer.TECH_MAIN._app._logger.StartLoggingMessages(TcoCore.eMessageCategory.All);
+
+
+            // Set up data exchange
+            switch (answer)
+            {
+                case 'M':
+                    SetUpMongoDatabase();
+                    break;
+                case 'J':
+                    SetUpJsonRepositories();
+                    break;
+                default:
+                    SetUpJsonRepositories();
+                    break;
+            }
+
+
         }
 
         private static void SetUpRepositories(IRepository<PlainStation001_ProductionData> processRecipiesRepository,
-                                       IRepository<PlainStation001_ProductionData> processTraceabiltyRepository,
-                                       IRepository<PlainStation001_TechnologicalSettings> technologyDataRepository)
+                                              IRepository<PlainStation001_ProductionData> processTraceabiltyRepository,
+                                              IRepository<PlainStation001_TechnologicalSettings> technologyDataRepository)
         {
             Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRepository(processRecipiesRepository);
             Entry.PlcHammer.TECH_MAIN._app._station001._processRecipies.InitializeRemoteDataExchange();
@@ -69,6 +97,20 @@ namespace HMI
             Entry.PlcHammer.TECH_MAIN._app._station001._technologicalDataManager.InitializeRemoteDataExchange();
         }
 
+      
+        private static IRepository<UserData> SetUpJsonRepository()
+        {
+            var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            var repositoryDirectory = Path.GetFullPath($"{executingAssemblyFile.Directory}..\\..\\..\\..\\..\\JSONREPOS\\");
+
+            if (!Directory.Exists(repositoryDirectory))
+            {
+                Directory.CreateDirectory(repositoryDirectory);
+            }
+
+            return new JsonRepository<UserData>(new JsonRepositorySettings<UserData>(Path.Combine(repositoryDirectory, "Users")));
+        }
+
         private static void SetUpJsonRepositories()
         {
             var executingAssemblyFile = new FileInfo(Assembly.GetExecutingAssembly().Location);
@@ -77,17 +119,6 @@ namespace HMI
             if (!Directory.Exists(repositoryDirectory))
             {
                 Directory.CreateDirectory(repositoryDirectory);
-
-                /* Unmerged change from project 'PlcHammer.Hmi (net5.0-windows)'
-                Before:
-                            }
-
-                            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));                        
-                After:
-                            }
-
-                            var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));                        
-                */
             }
 
             var processRecipiesRepository = new JsonRepository<PlainStation001_ProductionData>(new JsonRepositorySettings<PlainStation001_ProductionData>(Path.Combine(repositoryDirectory, "ProcessSettings")));

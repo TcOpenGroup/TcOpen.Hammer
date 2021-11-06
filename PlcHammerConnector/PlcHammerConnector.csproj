@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net48;net5.0</TargetFrameworks>
+		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -9,12 +10,14 @@
 		<None Remove="_generated\PlcHammer\**" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="TcOpen.Group" Version="0.4.2-alpha.560" />
-    <PackageReference Include="Inxton.vortex.compiler.console" Version="1.15.1-nightly.608" />
-    <PackageReference Include="TcOpen.Group.Wpf" Version="0.4.2-alpha.560" />  
-  </ItemGroup>
-  
+	<ItemGroup>
+	  <Folder Include="_meta\echac\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="TcOpen.Group" Version="0.4.2-alpha.713" />
+	</ItemGroup>
+	
 	<ItemGroup>
 		<Compile Update="Properties\Localizations.Designer.cs">
 			<DesignTime>True</DesignTime>
@@ -27,8 +30,5 @@
 			<Generator>ResXFileCodeGenerator</Generator>
 			<LastGenOutput>Localizations.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="_meta\echac\" />
 	</ItemGroup>
 </Project>

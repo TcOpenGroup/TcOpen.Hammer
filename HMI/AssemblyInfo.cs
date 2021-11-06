@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Windows;
 using Vortex.Presentation.Wpf;
 
@@ -10,4 +11,4 @@ using Vortex.Presentation.Wpf;
                                               // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: RenderableAssembly()]
+[assembly:RenderableAssembly()]

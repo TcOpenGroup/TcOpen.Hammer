@@ -80,27 +80,5 @@ inoutValue := _x1 / _ex;]]></ST>
         </Implementation>
       </Set>
     </Property>
-    <LineIds Name="RealValueSimulation">
-      <LineId Id="3" Count="11" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="RealValueSimulation.Dc.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="RealValueSimulation.Dc.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="RealValueSimulation.P1.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="RealValueSimulation.P1.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="RealValueSimulation.P2.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="RealValueSimulation.P2.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

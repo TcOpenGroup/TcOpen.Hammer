@@ -164,26 +164,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="Station001_Components">
-      <LineId Id="3" Count="16" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_Components.Gripper.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_Components.HorizontalNcAxis.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_Components.Service">
-      <LineId Id="3" Count="2" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_Components.Simulation">
-      <LineId Id="3" Count="58" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="Station001_Components.VerticalAxis.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

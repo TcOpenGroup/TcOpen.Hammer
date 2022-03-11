@@ -15,7 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="TcOpen.Group" Version="0.4.2-alpha.795" />
+	  <PackageReference Include="TcOpen.Group" Version="0.5.0-alpha.822" />
 	</ItemGroup>
 	
 	<ItemGroup>
